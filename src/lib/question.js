@@ -1,20 +1,10 @@
-/**
- * Úr sýnilausn fyrir verkefni 7.
- */
 
 const operators = ['+', '-', '*', '/'];
 
-/**
-* Skilar tölu af handahófi á bilinu [min, max]
-*/
 function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-/**
-* Útbýr spurningu og skilar sem hlut:
-* { problem: strengur með spurningu, answer: svar við spurningu sem tala }
-*/
 export default function question() {
   const operator = operators[randomNumber(0, operators.length - 1)];
 

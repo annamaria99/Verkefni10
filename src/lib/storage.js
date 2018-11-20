@@ -1,33 +1,29 @@
-/**
- * Sækir og vistar í localStorage
- */
-
-// Fast sem skilgreinir heiti á lykli sem vistað er undir í localStorage
+/* eslint-disable no-console */
 const LOCALSTORAGE_KEY = 'calc_game_scores';
+const Store = window.localStorage;
 
-/**
- * Sækir gögn úr localStorage. Skilað sem röðuðum lista á forminu:
- * { points: <stig>, name: <nafn> }
- *
- * @returns {array} Raðað fylki af svörum eða tóma fylkið ef ekkert vistað.
- */
 export function load() {
-  // todo útfæra
+  const scores = Store.getItem(LOCALSTORAGE_KEY);
+  // eslint-disable-next-line no-console
+  console.log('Sækja stig', scores);
+  return JSON.parse(scores);
 }
 
-/**
- * Vista stig
- *
- * @param {string} name Nafn þess sem á að vista
- * @param {number} points Stig sem á að vista
- */
 export function save(name, points) {
-  // todo útfæra
+  const data = { name, score: points };
+  // eslint-disable-next-line no-console
+  console.log('DATA==', data);
+  let playerScores = load();
+  if (playerScores && playerScores.length > 0) {
+    playerScores.push(data);
+    console.log('Vista stig - Add', playerScores);
+  } else {
+    playerScores = [data];
+    console.log('Vista stig - New', playerScores);
+  }
+  Store.setItem(LOCALSTORAGE_KEY, JSON.stringify(playerScores));
 }
 
-/**
- * Hreinsa öll stig úr localStorage
- */
 export function clear() {
-  // todo útfæra
+  Store.removeItem(LOCALSTORAGE_KEY);
 }
