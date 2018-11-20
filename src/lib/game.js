@@ -32,18 +32,17 @@ function tick(current) {
   if (current <= 0) {
     return finish();
   }
-
-  return () => {
-    setTimeout(tick(current - 1), 1000);
-  };
+  return setTimeout(() => {
+    tick(current - 1);
+  }, 1000);
 }
 
 function showQuestion() {
   console.log('Ný spurning');
-  const q = Question();
-  currentProblem = q;
+  const question = Question();
+  currentProblem = question;
   total += 1;
-  problem.querySelector('.problem__question').innerHTML = q.problem;
+  problem.querySelector('.problem__question').innerHTML = question.problem;
   problem.querySelector('.problem__input').value = '';
   problem.querySelector('.problem__input').focus();
 }
@@ -65,10 +64,10 @@ function onSubmit(e) {
   const isCorrect = (answer === userAnswer);
   const isProblem = (typeof currentProblem === 'object');
   if (isProblem && isCorrect) {
-    console.log('---ANSWER:', isCorrect, answer, userAnswer);
+    console.log('Svar:', isCorrect, answer, userAnswer);
     correct += 1;
   } else if (isProblem && !isCorrect) {
-    console.log('SUBMIT-ANSWER:', isCorrect, answer, userAnswer);
+    console.log('Skila svari:', isCorrect, answer, userAnswer);
   }
 
   showQuestion();
@@ -81,7 +80,7 @@ function onSubmitScore(e) {
   const highscore = new Highscore();
   Storage.save(playerName, finalScore);
   highscore.load();
-  console.log(`SUBMIT SCORE: Player=${playerName.value}, Correct=${finalScore}`);
+  console.log(`Skila svari: Player=${playerName.value}, Correct=${finalScore}`);
   total = 0;
   correct = 0;
   currentProblem = undefined;

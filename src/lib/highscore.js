@@ -44,7 +44,7 @@ export default class Highscore {
 
   // eslint-disable-next-line class-methods-use-this
   highscore(data) {
-    console.log('highscore---', data);
+    console.log('highscore', data);
     return data.sort((a, b) => b.score - a.score);
   }
 }
